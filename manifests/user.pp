@@ -11,6 +11,6 @@ define pgbouncer::user (
   concat::fragment { "pgbouncer_user_$name":
     target  => $pgbouncer::auth_file,
     order   => "20_user_$name",
-    content => "\"${username}\" \"${password}\"",
+    content => "\"${username}\" \"${password}\"\n",
   }
 }
