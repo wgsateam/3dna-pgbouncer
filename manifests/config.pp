@@ -17,7 +17,7 @@ class pgbouncer::config inherits pgbouncer {
 
   concat { $auth_file:
     owner => 'postgres',
-    group => 'postgres,',
+    group => 'postgres',
     mode  => '0640',
   }
 
