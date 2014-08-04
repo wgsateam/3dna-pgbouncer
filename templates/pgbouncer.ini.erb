@@ -46,14 +46,14 @@ auth_file = <%= @auth_file %>
 ;;;
 
 ; comma-separated list of users, who are allowed to change settings
-<%- if @admin_users -%>
+<%- if !@admin_users.empty? -%>
 admin_users = <%= @admin_users.join(', ') %>
 <%- else -%>
 ;admin_users = user2, someadmin, otheradmin
 <%- end -%>
 
 ; comma-separated list of users who are just allowed to use SHOW command
-<%- if @stats_users -%>
+<%- if !@stats_users.empty? -%>
 stats_users = <%= @stats_users.join(', ')  %>
 <%- else -%>
 ;stats_users = stats, root
@@ -89,7 +89,7 @@ server_reset_query = <%= @server_reset_query %>
 ; in startup packet.  Newer JDBC versions require the
 ; extra_float_digits here.
 ;
-<%- if @ingore_startup_parameters -%>
+<%- if !@ingore_startup_parameters.empty? -%>
 ingore_startup_parameters = <%= @ingore_startup_parameters.join(', ') %>
 <%- else -%>
 ;ignore_startup_parameters = extra_float_digits
