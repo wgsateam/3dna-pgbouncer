@@ -1,2 +1,2 @@
-<%= @dbname %> = <%= @real_options.map { |k,v| "#{k}=#{v}" }.join(' ') %>
+<%= @dbname %> = <%= @database ? "database=#{@database}" : '' %> <%= @user ? "user=#{@user}" : '' %> <%= @password ? "password=#{@password}" : '' %> <%= @host ? "host=#{@host}" : '' %> <%= @port ? "port=#{@port}" : '' %> <%= @options.sort.map { |k,v| "#{k}=#{v}" }.join(' ') %>
 
