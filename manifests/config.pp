@@ -24,6 +24,6 @@ class pgbouncer::config inherits pgbouncer {
   concat::fragment { 'pgbouncer user list header':
     target  => $auth_file,
     order   => '00',
-    content => "# this file managed by puppet, do not edit it!\n",
+    content => '',
   }
 }
