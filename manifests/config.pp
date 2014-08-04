@@ -15,7 +15,7 @@ class pgbouncer::config inherits pgbouncer {
     content => template('pgbouncer/pgbouncer.ini.erb'),
   }
 
-  concat::fragment { $auth_file:
+  concat { $auth_file:
     owner => 'postgres',
     group => 'postgres,',
     mode  => '0640',
