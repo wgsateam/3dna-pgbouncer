@@ -15,5 +15,15 @@ class pgbouncer::config inherits pgbouncer {
     content => template('pgbouncer/pgbouncer.ini.erb'),
   }
 
-  Concat::Fragment<| target == $configfile |> ~> Class['::pgbouncer::service']
+  concat::fragment { $auth_file:
+    owner => 'postgres',
+    group => 'postgres,',
+    mode  => '0640',
+  }
+
+  concat::fragment { 'pgbouncer user list header':
+    target  => $auth_file,
+    order   => '00',
+    content => '# this file managed by puppet, do not edit it!',
+  }
 }

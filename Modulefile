@@ -8,3 +8,4 @@ description   'sets up and configures pgbouncer'
 project_page  'https://github.com/3dna/3dna-pgbouncer/'
 
 dependency 'puppetlabs/stdlib'
+dependency 'puppetlabs/concat'
