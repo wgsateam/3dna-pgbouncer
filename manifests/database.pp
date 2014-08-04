@@ -7,7 +7,7 @@
 # I hope to fix this in a later version
 #
 define pgbouncer::database (
-  $name     = $title,
+  $dbname   = $title,
   $database = undef,
   $user     = undef,
   $password = undef,
