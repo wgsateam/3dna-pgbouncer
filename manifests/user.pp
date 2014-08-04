@@ -1,12 +1,8 @@
-# == Define pgbouncer::database
+# == Define pgbouncer::user
 #
-# defines a database for pgbouncer to service
-# "hard" parameters take precedence over options supplied through the options hash
-# currently, the "connect_query" option needs to be extra quoted because of how it's set up in the template
-# example: options => { connect_query => '"select 1"' }
-# I hope to fix this in a later version
+# defines a user for pgbouncer
 #
-define pgbouncer::database (
+define pgbouncer::user (
   $username = $title,
   $password = undef,
 ) {
