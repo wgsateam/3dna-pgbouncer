@@ -1,29 +1,36 @@
-# == Class pgbouncer::config
+#== Class pgbouncer::config
 #
 # This class is called from pgbouncer
 #
 class pgbouncer::config inherits pgbouncer {
   concat { $configfile:
-    owner => 'postgres',
-    group => 'postgres',
-    mode  => '0640',
+    owner           => $owner,
+    group           => $group,
+    mode            => '0640',
   }
 
   concat::fragment { 'pgbouncer main config':
-    target  => $configfile,
-    order   => '00',
-    content => template('pgbouncer/pgbouncer.ini.erb'),
+    target          => $configfile,
+    order           => '00',
+    content         => template('pgbouncer/pgbouncer.ini.erb'),
   }
 
   concat { $auth_file:
-    owner => 'postgres',
-    group => 'postgres',
-    mode  => '0640',
+    owner           => $owner,
+    group           => $group,
+    mode            => '0640',
   }
 
   concat::fragment { 'pgbouncer user list header':
-    target  => $auth_file,
-    order   => '00',
-    content => '',
+    target          => $auth_file,
+    order           => '00',
+    content         => '',
+  }
+
+  create_resources(pgbouncer::user, $admin_users)
+  create_resources(pgbouncer::user, $stats_users)
+
+  if $sync_pg_users == true {
+    create_resources(pgbouncer::user, $::pgusers_hash)
   }
 }

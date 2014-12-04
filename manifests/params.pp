@@ -4,16 +4,25 @@
 # It sets variables according to platform
 #
 class pgbouncer::params {
-  $logfile = '/var/log/postgresql/pgbouncer.log'
-  $pidfile = '/var/run/postgresql/pgbouncer.pid'
-  $auth_file = '/etc/pgbouncer/userlist.txt'
-  $configfile = '/etc/pgbouncer/pgbouncer.ini'
-  
+  $auth_file    = '/etc/pgbouncer/userlist.txt'
+  $configfile   = '/etc/pgbouncer/pgbouncer.ini'
+  $package_name = 'pgbouncer'
+  $service_name = 'pgbouncer'
+
   case $::osfamily {
     'Debian': {
-      $package_name = 'pgbouncer'
-      $service_name = 'pgbouncer'
+      $logfile         = '/var/log/postgresql/pgbouncer.log'
+      $pidfile         = '/var/run/postgresql/pgbouncer.pid'
       $unix_socket_dir = '/var/run/postgresql'
+      $owner           = 'postgres'
+      $group           = 'postgres'
+    }
+    'RedHat': {
+      $logfile         = '/var/log/pgbouncer.log'
+      $pidfile         = '/var/run/pgbouncer/pgbouncer.pid'
+      $owner           = 'pgbouncer'
+      $group           = 'pgbouncer'
+      $unix_socket_dir = '/tmp'
     }
     default: {
       fail("${::operatingsystem} not supported")

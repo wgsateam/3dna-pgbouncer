@@ -47,14 +47,14 @@ auth_file = <%= @auth_file %>
 
 ; comma-separated list of users, who are allowed to change settings
 <%- if !@admin_users.empty? -%>
-admin_users = <%= @admin_users.join(', ') %>
+admin_users = <%= @admin_users.keys().join(', ') %>
 <%- else -%>
 ;admin_users = user2, someadmin, otheradmin
 <%- end -%>
 
 ; comma-separated list of users who are just allowed to use SHOW command
 <%- if !@stats_users.empty? -%>
-stats_users = <%= @stats_users.join(', ')  %>
+stats_users = <%= @stats_users.keys().join(', ')  %>
 <%- else -%>
 ;stats_users = stats, root
 <%- end -%>

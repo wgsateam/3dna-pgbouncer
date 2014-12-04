@@ -20,8 +20,8 @@ class pgbouncer (
   $unix_socket_group         = undef,
   $auth_type                 = 'trust',
   $auth_file                 = $pgbouncer::params::auth_file,
-  $admin_users               = [],
-  $stats_users               = [],
+  $admin_users               = {},
+  $stats_users               = {},
   $pool_mode                 = 'session',
   $server_reset_query        = 'DISCARD ALL',
   $ignore_startup_parameters = [],
@@ -54,11 +54,15 @@ class pgbouncer (
   $tcp_keepintvl             = undef,
   $dns_max_ttl               = undef,
   $dns_zone_check_period     = undef,
+  $sync_pg_users             = false,
+  $owner                     = $pgbouncer::params::owner,
+  $group                     = $pgbouncer::params::group,
+
 ) inherits pgbouncer::params {
 
   # validate parameters here
-  validate_array($admin_users)
-  validate_array($stats_users)
+  validate_hash($admin_users)
+  validate_hash($stats_users)
   validate_array($ignore_startup_parameters)
 
   include pgbouncer::install
