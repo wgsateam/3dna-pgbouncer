@@ -1,10 +1,13 @@
 Facter.add(:have_psql) do
 
     confine :kernel => %w{Linux SunOS}
-
-    setcode do
-        system("which psql > /dev/null 2>&1").to_s
+  setcode do
+    if Facter::Core::Execution.exec(Facter.value('ps')).match(/postgres/)
+        "true"
+    else
+        "false"
     end
+  end
 end
 
 Facter.add(:pgusers_array) do
