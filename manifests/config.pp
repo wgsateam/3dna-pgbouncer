@@ -30,11 +30,7 @@ class pgbouncer::config inherits pgbouncer {
   create_resources(pgbouncer::user, $admin_users)
   create_resources(pgbouncer::user, $stats_users)
 
-  if $sync_pg_users == true {
-    if $::pgusers_hash != undef {
+  if $sync_pg_users and $::pgusers_hash {
     create_resources(pgbouncer::user, $::pgusers_hash)
-    } else {
-      notify {'No users to sync or error getting fact': }
-    }
   }
 }
