@@ -4,33 +4,37 @@
 #
 class pgbouncer::config inherits pgbouncer {
   concat { $configfile:
-    owner           => $owner,
-    group           => $group,
-    mode            => '0640',
+    owner   => $owner,
+    group   => $group,
+    mode    => '0640',
   }
 
   concat::fragment { 'pgbouncer main config':
-    target          => $configfile,
-    order           => '00',
-    content         => template('pgbouncer/pgbouncer.ini.erb'),
+    target  => $configfile,
+    order   => '00',
+    content => template('pgbouncer/pgbouncer.ini.erb'),
   }
 
   concat { $auth_file:
-    owner           => $owner,
-    group           => $group,
-    mode            => '0640',
+    owner   => $owner,
+    group   => $group,
+    mode    => '0640',
   }
 
   concat::fragment { 'pgbouncer user list header':
-    target          => $auth_file,
-    order           => '00',
-    content         => '',
+    target  => $auth_file,
+    order   => '00',
+    content => '',
   }
 
   create_resources(pgbouncer::user, $admin_users)
   create_resources(pgbouncer::user, $stats_users)
 
   if $sync_pg_users == true {
+    if $::pgusers_hash != undef {
     create_resources(pgbouncer::user, $::pgusers_hash)
+    } else {
+      notify {'No users to sync or error getting fact': }
+    }
   }
 }
