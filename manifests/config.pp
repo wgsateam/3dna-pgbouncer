@@ -4,9 +4,10 @@
 #
 class pgbouncer::config inherits pgbouncer {
   concat { $configfile:
-    owner   => $owner,
-    group   => $group,
-    mode    => '0640',
+    owner  => $owner,
+    group  => $group,
+    mode   => '0640',
+    notify => Service[$pgbouncer::service_name],
   }
 
   concat::fragment { 'pgbouncer main config':
@@ -16,9 +17,10 @@ class pgbouncer::config inherits pgbouncer {
   }
 
   concat { $auth_file:
-    owner   => $owner,
-    group   => $group,
-    mode    => '0640',
+    owner  => $owner,
+    group  => $group,
+    mode   => '0640',
+    notify => Service[$pgbouncer::service_name],
   }
 
   concat::fragment { 'pgbouncer user list header':
