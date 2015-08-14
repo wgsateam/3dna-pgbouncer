@@ -8,9 +8,9 @@ define pgbouncer::user (
 ) {
   include pgbouncer
 
-  concat::fragment { "pgbouncer_user_$name":
+  concat::fragment { "pgbouncer_user_${name}":
     target  => $pgbouncer::auth_file,
-    order   => "20_user_$name",
+    order   => "20_user_${name}",
     content => "\"${username}\" \"${password}\"\n",
   }
 }

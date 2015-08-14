@@ -18,9 +18,9 @@ define pgbouncer::database (
 
   validate_hash($options)
 
-  concat::fragment { "pgbouncer_database_$name":
+  concat::fragment { "pgbouncer_database_${name}":
     target  => $pgbouncer::configfile,
-    order   => "20_database_10_$name",
+    order   => "20_database_10_${name}",
     content => template('pgbouncer/pgbouncer.ini.database_fragment.erb'),
   }
 }
