@@ -24,6 +24,13 @@ class pgbouncer::params {
       $group           = 'pgbouncer'
       $unix_socket_dir = '/tmp'
     }
+    'Suse': {
+      $logfile         = '/var/log/pgbouncer/pgbouncer.log'
+      $pidfile         = '/var/run/pgbouncer/pgbouncer.pid'
+      $owner           = 'pgbouncer'
+      $group           = 'pgbouncer'
+      $unix_socket_dir = '/tmp'
+    }
     default: {
       fail("${::operatingsystem} not supported")
     }

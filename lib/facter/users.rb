@@ -2,7 +2,7 @@ Facter.add(:have_psql) do
 
     confine :kernel => %w{Linux SunOS}
   setcode do
-    if Facter::Core::Execution.exec(Facter.value('ps')).match(/^postgres/)
+    if Facter::Util::Resolution.exec(Facter.value('ps')).match(/^postgres/)
         "true"
     else
         "false"
@@ -13,7 +13,7 @@ end
 Facter.add(:pgusers_array) do
   confine :have_psql => "true"
   setcode do
-   pgusers_array = Facter::Core::Execution.exec('psql -qAtX -d postgres -c \'SELECT usename from pg_shadow where passwd is not null order by 1\'').split("\n")
+   pgusers_array = Facter::Util::Resolution.exec('psql -qAtX -d postgres -c \'SELECT usename from pg_shadow where passwd is not null order by 1\'').split("\n")
    pgusers_array
   end
 end
@@ -25,7 +25,7 @@ Facter.add(:pgusers_hash) do
     pgusers_hash = {}
 
     pgusers_array.each do |user|
-      passwd = Facter::Core::Execution.exec("psql -qAtX -d postgres -c \"SELECT passwd from pg_shadow where usename='#{user}'\"")
+      passwd = Facter::Util::Resolution.exec("psql -qAtX -d postgres -c \"SELECT passwd from pg_shadow where usename='#{user}'\"")
       if passwd
         pgusers_hash[user] = {'password' => passwd, 'username' => user}
       end
