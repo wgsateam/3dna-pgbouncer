@@ -2,7 +2,7 @@ Facter.add(:have_psql) do
 
   confine :kernel => %w{Linux SunOS}
   setcode do
-    if Facter::Core::Execution.exec("ps -ef").match(/postgres/)
+    if Facter::Core::Execution.exec("ps -ef").match(/^postgres/)
         true
     else
         false
