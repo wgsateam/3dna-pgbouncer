@@ -25,6 +25,12 @@ Environment=BOUNCERCONF=/etc/pgbouncer/pgbouncer.ini
 Environment=PIDFILE=/var/run/pgbouncer/pgbouncer.pid
 PIDFile=/var/run/pgbouncer/pgbouncer.pid
 
+# Run ExecStartPre with root-permissions
+PermissionsStartOnly=true
+ExecStartPre=-/usr/bin/mkdir /var/run/pgbouncer
+ExecStartPre=/usr/bin/chown -R pgbouncer:pgbouncer /var/run/pgbouncer
+
+
 # Where to send early-startup messages from the server
 # This is normally controlled by the global default set by systemd
 # StandardOutput=syslog

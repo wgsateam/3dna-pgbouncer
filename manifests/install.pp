@@ -6,6 +6,12 @@ class pgbouncer::install inherits pgbouncer {
     ensure => present,
   }
 
+  file { $pgbouncer::params::logfile:
+    ensure  => file,
+    owner   => $pgbouncer::params::owner,
+    group   => $pgbouncer::params::group,
+    mode    => '0640';
+  }
 
   if "${::operatingsystem}${::operatingsystemmajrelease}" == 'CentOS7' {
     include systemd
