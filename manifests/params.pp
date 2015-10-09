@@ -18,7 +18,7 @@ class pgbouncer::params {
       $group           = 'postgres'
     }
     'RedHat': {
-      if $::operatingsystemmajrelease = 7 {
+      if versioncmp($::operatingsystemmajrelease, '7') == 0 {
         $logfile         = '/var/log/pgbouncer/pgbouncer.log'
       }
       else {
