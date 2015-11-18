@@ -34,7 +34,7 @@ ExecStartPre=/usr/bin/chown -R pgbouncer:pgbouncer /var/run/pgbouncer
 # Where to send early-startup messages from the server
 # This is normally controlled by the global default set by systemd
 # StandardOutput=syslog
-ExecStart=/usr/bin/pgbouncer ${BOUNCERCONF}
+ExecStart=/usr/bin/pgbouncer -q ${BOUNCERCONF}
 ExecReload=/bin/kill -HUP $MAINPID
 
 # Give a reasonable amount of time for the server to start up/shut down
