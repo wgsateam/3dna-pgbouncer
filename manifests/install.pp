@@ -20,10 +20,11 @@ class pgbouncer::install inherits pgbouncer {
       source  => 'puppet:///modules/pgbouncer/pgbouncer.service',
       require => Package[$pgbouncer::package_name],
       mode    => '0644',
+      notify  => Service[$pgbouncer::service_name],
     }
     ~>
     Exec['systemctl-daemon-reload']
-    ~>
+    ->
     Service[$pgbouncer::service_name]
   }
 }
