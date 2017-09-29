@@ -4,8 +4,7 @@ class pgbouncer::install inherits pgbouncer {
 
   package { $pgbouncer::package_name:
     ensure => present,
-  }
-
+  } ->
   file { $pgbouncer::params::logfile:
     ensure  => file,
     owner   => $pgbouncer::params::owner,
