@@ -90,7 +90,7 @@ server_reset_query = <%= @server_reset_query %>
 ; extra_float_digits here.
 ;
 <%- if !@ignore_startup_parameters.empty? -%>
-ingore_startup_parameters = <%= @ingore_startup_parameters.join(', ') %>
+ignore_startup_parameters = <%= @ignore_startup_parameters.join(', ') %>
 <%- else -%>
 ;ignore_startup_parameters = extra_float_digits
 <%- end -%>
