@@ -12,11 +12,9 @@ define pgbouncer::database (
   $password = undef,
   $host     = undef,
   $port     = undef,
-  $options  = {},
+  Hash $options  = {},
 ) {
   include pgbouncer
-
-  validate_hash($options)
 
   concat::fragment { "pgbouncer_database_${name}":
     target  => $pgbouncer::configfile,
