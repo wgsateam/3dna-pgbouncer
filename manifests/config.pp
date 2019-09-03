@@ -3,11 +3,12 @@
 # This class is called from pgbouncer
 #
 class pgbouncer::config inherits pgbouncer {
+  include pgbouncer::reload
   concat { $::pgbouncer::configfile:
     owner  => $::pgbouncer::owner,
     group  => $::pgbouncer::group,
     mode   => '0640',
-    notify => Service[$::pgbouncer::service_name],
+    notify => Exec['pgbouncer_reload'],
   }
 
   concat::fragment { 'pgbouncer main config':
@@ -20,7 +21,7 @@ class pgbouncer::config inherits pgbouncer {
     owner  => $::pgbouncer::owner,
     group  => $::pgbouncer::group,
     mode   => '0640',
-    notify => Service[$::pgbouncer::service_name],
+    notify => Exec['pgbouncer_reload'],
   }
 
   concat::fragment { 'pgbouncer user list header':
