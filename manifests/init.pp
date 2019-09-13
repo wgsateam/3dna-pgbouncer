@@ -65,6 +65,6 @@ class pgbouncer (
   include pgbouncer::service
 
   anchor { ['pgbouncer::begin', 'pgbouncer::end']: }
-  Anchor['pgbouncer::begin'] -> Class['pgbouncer::install'] -> Class['pgbouncer::config'] ~> Class['pgbouncer::service'] -> Anchor['pgbouncer::end']
+  Anchor['pgbouncer::begin'] -> Class['pgbouncer::install'] -> Class['pgbouncer::config'] -> Class['pgbouncer::service'] -> Anchor['pgbouncer::end']
 
 }

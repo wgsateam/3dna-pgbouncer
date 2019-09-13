@@ -7,7 +7,6 @@ class pgbouncer::config inherits pgbouncer {
     owner  => $::pgbouncer::owner,
     group  => $::pgbouncer::group,
     mode   => '0640',
-    notify => Class[$::pgbouncer::reload],
   }
 
   concat::fragment { 'pgbouncer main config':
@@ -20,7 +19,6 @@ class pgbouncer::config inherits pgbouncer {
     owner  => $::pgbouncer::owner,
     group  => $::pgbouncer::group,
     mode   => '0640',
-    notify => Class[$::pgbouncer::reload],
   }
 
   concat::fragment { 'pgbouncer user list header':
