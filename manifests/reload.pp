@@ -10,5 +10,6 @@ class pgbouncer::reload inherits pgbouncer {
     command     => 'service pgbouncer reload',
     refreshonly => true,
     require     => Class['pgbouncer::service'],
+    subscribe   => Class['pgbouncer::config']
   }
 }
