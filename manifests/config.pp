@@ -3,6 +3,7 @@
 # This class is called from pgbouncer
 #
 class pgbouncer::config inherits pgbouncer {
+  include pgbouncer::reload
   concat { $::pgbouncer::configfile:
     owner  => $::pgbouncer::owner,
     group  => $::pgbouncer::group,
