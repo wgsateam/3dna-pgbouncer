@@ -236,6 +236,13 @@ client_login_timeout = <%= @client_login_timeout %>
 ;client_login_timeout = 60
 <%- end -%>
 
+;;If a client has been in idle in transaction state longer, it will be disconnected. [seconds]
+<%- if @idle_transaction_timeout -%>
+idle_transaction_timeout = <%= @idle_transaction_timeout %>
+<%- else -%>
+;idle_transaction_timeout = 0
+<%- end -%>
+
 ;; Clean automatically created database entries (via "*") if they
 ;; stay unused in this many seconds.
 <%- if @autodb_idle_timeout -%>
