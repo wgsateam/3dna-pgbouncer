@@ -43,6 +43,7 @@ class pgbouncer (
   $query_wait_timeout              = undef,
   $client_idle_timeout             = undef,
   $client_login_timeout            = undef,
+  $idle_transaction_timeout        = undef,
   $autodb_idle_timeout             = undef,
   $pkt_buf                         = undef,
   $listen_backlog                  = undef,
