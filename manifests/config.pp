@@ -28,11 +28,8 @@ class pgbouncer::config inherits pgbouncer {
     order   => '00',
     content => '',
   }
-
-  create_resources(pgbouncer::user, $::pgbouncer::admin_users)
-  create_resources(pgbouncer::user, $::pgbouncer::stats_users)
-
-  if $::pgbouncer::sync_pg_users and $::pgusers_hash {
-    create_resources(pgbouncer::user, $::pgusers_hash)
+  $pgbouncer_users_hash = deep_merge($::pgusers_hash,$::pgbouncer::admin_users,$::pgbouncer::stats_users)
+  if $pgbouncer_users_hash {
+    create_resources(pgbouncer::user, $pgbouncer_users_hash)
   }
 }
